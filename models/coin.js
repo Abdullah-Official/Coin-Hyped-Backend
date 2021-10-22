@@ -55,6 +55,12 @@ const coinSchema = mongoose.Schema({
       ref: "Vote",
     },
   ],
+  comments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comment",
+    },
+  ],
 });
 coinSchema.virtual("id").get(function () {
   return this._id.toHexString();

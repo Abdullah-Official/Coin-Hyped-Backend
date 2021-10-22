@@ -41,7 +41,7 @@ router.get(`/`, async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-  const coin = await Coin.findById(req.params.id);
+  const coin = await Coin.findById(req.params.id).populate("comments votes");
 
   if (!coin) {
     res.status(500).json({ success: false });

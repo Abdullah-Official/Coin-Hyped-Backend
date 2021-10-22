@@ -11,6 +11,7 @@ app.options("*", cors());
 const userRouters = require("./routers/users");
 const coinRouters = require("./routers/coins");
 const voteRouters = require("./routers/votes");
+const commentRouters = require("./routers/comments");
 
 //middleware
 app.use(express.json());
@@ -27,6 +28,7 @@ const PORT = process.env.PORT || 8000;
 app.use(`${api}/users`, userRouters);
 app.use(`${api}/coins`, coinRouters);
 app.use(`${api}/votes`, voteRouters);
+app.use(`${api}/comments`, commentRouters);
 
 // database connection
 mongoose

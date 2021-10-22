@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const commentSchema = mongoose.Schema(
   {
+    user_name: {
+      type: String,
+      require: true,
+    },
     text: {
       type: String,
       require: true,
@@ -9,10 +13,14 @@ const commentSchema = mongoose.Schema(
     image: {
       type: String,
     },
-    likes:{
-        type: [String],
-        default: []
+    likes: {
+      type: [String],
+      default: [],
     },
+    coin_id:{
+        type: String,
+        require: true,
+    }
   },
   { timestamps: true }
 );
@@ -24,4 +32,4 @@ commentSchema.virtual("id").get(function () {
 commentSchema.set("toJSON", {
   virtuals: true,
 });
-exports.Vote = mongoose.model("Comment", commentSchema);
+exports.Comment = mongoose.model("Comment", commentSchema);
