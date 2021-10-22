@@ -10,10 +10,13 @@ app.options("*", cors());
 // Routes
 const userRouters = require("./routers/users");
 const coinRouters = require("./routers/coins");
+const voteRouters = require("./routers/votes");
 
 //middleware
 app.use(express.json());
 app.use(morgan("tiny"));
+app.use(express.static(__dirname + "/public"));
+app.use("/public/uploads", express.static(__dirname + "/public/uploads"));
 require("dotenv/config");
 
 // .env variables
@@ -23,6 +26,7 @@ const PORT = process.env.PORT || 8000;
 // Routers
 app.use(`${api}/users`, userRouters);
 app.use(`${api}/coins`, coinRouters);
+app.use(`${api}/votes`, voteRouters);
 
 // database connection
 mongoose

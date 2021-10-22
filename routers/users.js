@@ -5,7 +5,9 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 router.get(`/`, async (req, res) => {
-  const userList = await User.find().select("-password -confirmPassword");
+  const userList = await User.find()
+    .select("-password -confirmPassword")
+    .populate({ path: "coins", populate: { path: "votes" } });
 
   if (!userList) {
     res.status(500).json({ success: false });

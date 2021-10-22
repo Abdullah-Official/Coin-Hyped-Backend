@@ -1,6 +1,14 @@
 const mongoose = require("mongoose");
 
 const coinSchema = mongoose.Schema({
+  contract_address: {
+    type: String,
+    required: true,
+  },
+  token_type: {
+    type: String,
+    required: true,
+  },
   network: {
     type: String,
     required: true,
@@ -41,10 +49,12 @@ const coinSchema = mongoose.Schema({
     type: String,
     required: false,
   },
-  votes: {
-    type: Number,
-    default: 0,
-  },
+  votes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Vote",
+    },
+  ],
 });
 coinSchema.virtual("id").get(function () {
   return this._id.toHexString();

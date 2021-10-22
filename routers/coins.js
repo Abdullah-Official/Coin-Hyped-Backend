@@ -32,7 +32,7 @@ const storage = multer.diskStorage({
 const uploadOptions = multer({ storage: storage });
 
 router.get(`/`, async (req, res) => {
-  const coinList = await Coin.find();
+  const coinList = await Coin.find().populate({ path: "votes" });
 
   if (!coinList) {
     res.status(500).json({ success: false });
@@ -59,6 +59,8 @@ router.post(
     const fileName = file.filename;
     const basePath = `${req.protocol}://${req.get("host")}/public/uploads/`;
     const {
+      contract_address,
+      token_type,
       network,
       coinName,
       symbol,
@@ -71,6 +73,8 @@ router.post(
       votes,
     } = req.body;
     let coin = new Coin({
+      contract_address,
+      token_type,
       network,
       coinName,
       symbol,
@@ -88,7 +92,7 @@ router.post(
     await coin.save();
     user.coins.push(coin);
     user.save();
-    res.status(200).json({ user });
+    res.status(200).json({ coin });
 
     coin = await coin.save();
 
