@@ -12,6 +12,7 @@ const userRouters = require("./routers/users");
 const coinRouters = require("./routers/coins");
 const voteRouters = require("./routers/votes");
 const commentRouters = require("./routers/comments");
+const adRouters = require("./routers/ads");
 
 //middleware
 app.use(express.json());
@@ -29,6 +30,7 @@ app.use(`${api}/users`, userRouters);
 app.use(`${api}/coins`, coinRouters);
 app.use(`${api}/votes`, voteRouters);
 app.use(`${api}/comments`, commentRouters);
+app.use(`${api}/ads`, adRouters);
 
 // database connection
 mongoose
